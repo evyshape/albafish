@@ -31,7 +31,7 @@ class ItemDatabase:
             data_path: Путь к JSON файлу с данными (опционально)
         """
         if data_path is None:
-            data_path = Path(__file__).parent.parent / "data" / "items.json"
+            data_path = Path(__file__).parent / "data" / "items.json"
         
         self.data_path = Path(data_path)
         
