@@ -238,13 +238,7 @@ class FishingMonitor:
         if player_id is None:
             return
 
-        if not self._player_id_locked and self._player_id != player_id:
-            if self._player_id is not None:
-                logger.info(f"Player ID изменен: {self._player_id} -> {player_id}")
-            self._player_id = player_id
-
         if self._player_id is not None and player_id != self._player_id:
-            logger.debug(f"Пропущена смерть другого игрока: {player_id}")
             return
         
         fishing_event = self._create_event(
@@ -252,8 +246,6 @@ class FishingMonitor:
             player_id=player_id,
             object_id=killer_id,
         )
-        
-        logger.warning(f"Death event: player_id={player_id}, killer_id={killer_id}")
         self._emit_event(fishing_event)
     
     def _handle_request(self, request: OperationRequest) -> None:
