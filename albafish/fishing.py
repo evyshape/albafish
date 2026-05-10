@@ -18,6 +18,7 @@ from .constants import (
     EVENT_TYPE_NAMES,
     RequestParameter,
     FishingAction,
+    FishingEventType,
 )
 from .exceptions import (
     PacketParseError,
