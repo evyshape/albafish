@@ -178,7 +178,7 @@ This is an educational project. Feel free to:
 ## 📜 License
 
 Non-Commercial License - Free for educational and research purposes only.  
-See [LICENSE](LICENSE) for details.
+See [LICENSE](https://github.com/evyshape/albafish/blob/main/LICENSE) for details.
 
 ## 👤 Author
 

@@ -178,7 +178,7 @@ monitor = FishingMonitor(player_id=12345)
 ## 📜 Лицензия
 
 Некоммерческая лицензия - Бесплатно только для образовательных и исследовательских целей.  
-Подробности в [LICENSE](LICENSE).
+Подробности в [LICENSE](https://github.com/evyshape/albafish/blob/main/LICENSE).
 
 ## 👤 Автор
 
