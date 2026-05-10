@@ -33,6 +33,7 @@ pip install albafish
 
 **Требования:**
 - Python 3.7+
+- `scapy>=2.5.0` (устанавливается автоматически)
 - Права администратора/root (для перехвата пакетов)
 - Windows: [Npcap](https://npcap.com/#download)
 - Linux: `libpcap-dev`

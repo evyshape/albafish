@@ -33,6 +33,7 @@ pip install albafish
 
 **Requirements:**
 - Python 3.7+
+- `scapy>=2.5.0` (installed automatically)
 - Administrator/root privileges (for packet capture)
 - Windows: [Npcap](https://npcap.com/#download)
 - Linux: `libpcap-dev`
