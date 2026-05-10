@@ -1,0 +1,81 @@
+[project]
+name = "albafish"
+version = "1.0.0"
+description = "Educational toolkit for analyzing Albion Online fishing mechanics through network packets"
+readme = "README.md"
+requires-python = ">=3.7"
+license = { text = "Non-Commercial - Educational and research use only" }
+authors = [
+    { name = "evyshape", email = "evyshape@gmail.com" }
+]
+keywords = ["albion", "fishing", "packet-analysis", "photon", "educational", "research"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: Other/Proprietary License",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Education",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+dependencies = [
+    "scapy>=2.5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "mypy>=1.7.0",
+    "ruff>=0.1.6",
+    "black>=23.11.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/evyshape/albafish"
+Documentation = "https://github.com/evyshape/albafish#readme"
+Repository = "https://github.com/evyshape/albafish"
+Issues = "https://github.com/evyshape/albafish/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatchling.build.targets.wheel]
+packages = ["albafish"]
+
+[tool.hatchling.build.targets.wheel.force-include]
+"data" = "albafish/data"
+
+[tool.ruff]
+line-length = 100
+target-version = "py37"
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
+
+[tool.black]
+line-length = 100
+target-version = ["py37"]
+
+[tool.mypy]
+python_version = "3.7"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=albafish --cov-report=term-missing"
