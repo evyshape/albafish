@@ -3,4 +3,4 @@ include README.ru.md
 include LICENSE
 include CHANGELOG.md
 include albafish/py.typed
-recursive-include data *.json
+recursive-include albafish/data *.json
