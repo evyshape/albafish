@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.0.2] - 2026-05-10
+
+### Added
+- Added missing event decorators for complete event coverage:
+  - `on_cast_end()` - Cast end event (float landed in water)
+  - `on_float()` - Float appearance/update event
+  - `on_start_pull()` - Started pulling fish event
+  - `on_pulling()` - Pulling fish process event
+  - `on_stop_pull()` - Stopped pulling event
+  - `on_fishing_catch()` - Fishing catch in progress event
+  - `on_cancel()` - Cast cancelled event
+- All decorators now available in both `FishingRouter` and `AsyncFishingRouter`
+- Complete parity between event types in `FishingEvent` and available decorators
+
+### Changed
+- Improved decorator documentation
+
 ## [1.0.1] - 2026-05-10
 
 ### Fixed

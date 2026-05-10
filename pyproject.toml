@@ -1,6 +1,6 @@
 [project]
 name = "albafish"
-version = "1.0.1"
+version = "1.0.2"
 description = "Educational toolkit for analyzing Albion Online fishing mechanics through network packets"
 readme = "README.md"
 requires-python = ">=3.7"

@@ -88,6 +88,86 @@ class FishingRouter(BaseRouter):
             return func
         return decorator
     
+    def on_cast_end(self, priority: int = 0) -> Callable:
+        """
+        Декоратор для обработки события окончания заброса (поплавок упал в воду)
+        
+        Args:
+            priority: Приоритет обработчика (больше = раньше)
+        
+        Пример:
+            @router.on_cast_end()
+            def my_handler(event):
+                print("Поплавок упал в воду!")
+        """
+        def decorator(func: Callable) -> Callable:
+            if self._monitor:
+                handler = FilteredEventHandler(func, "cast_end", {}, self.items_db)
+                self._monitor.event_bus.register_handler(handler, priority)
+            logger.debug(f"Зарегистрирован обработчик окончания заброса: {func.__name__}")
+            return func
+        return decorator
+    
+    def on_float(self, priority: int = 0) -> Callable:
+        """Декоратор для обработки события появления/обновления поплавка"""
+        def decorator(func: Callable) -> Callable:
+            if self._monitor:
+                handler = FilteredEventHandler(func, "float", {}, self.items_db)
+                self._monitor.event_bus.register_handler(handler, priority)
+            logger.debug(f"Зарегистрирован обработчик поплавка: {func.__name__}")
+            return func
+        return decorator
+    
+    def on_start_pull(self, priority: int = 0) -> Callable:
+        """Декоратор для обработки события начала вытягивания рыбы"""
+        def decorator(func: Callable) -> Callable:
+            if self._monitor:
+                handler = FilteredEventHandler(func, "start_pull", {}, self.items_db)
+                self._monitor.event_bus.register_handler(handler, priority)
+            logger.debug(f"Зарегистрирован обработчик начала вытягивания: {func.__name__}")
+            return func
+        return decorator
+    
+    def on_pulling(self, priority: int = 0) -> Callable:
+        """Декоратор для обработки события вытягивания рыбы (процесс)"""
+        def decorator(func: Callable) -> Callable:
+            if self._monitor:
+                handler = FilteredEventHandler(func, "pulling", {}, self.items_db)
+                self._monitor.event_bus.register_handler(handler, priority)
+            logger.debug(f"Зарегистрирован обработчик вытягивания: {func.__name__}")
+            return func
+        return decorator
+    
+    def on_stop_pull(self, priority: int = 0) -> Callable:
+        """Декоратор для обработки события остановки вытягивания (отпустили)"""
+        def decorator(func: Callable) -> Callable:
+            if self._monitor:
+                handler = FilteredEventHandler(func, "stop_pull", {}, self.items_db)
+                self._monitor.event_bus.register_handler(handler, priority)
+            logger.debug(f"Зарегистрирован обработчик остановки вытягивания: {func.__name__}")
+            return func
+        return decorator
+    
+    def on_fishing_catch(self, priority: int = 0) -> Callable:
+        """Декоратор для обработки улова в процессе рыбалки"""
+        def decorator(func: Callable) -> Callable:
+            if self._monitor:
+                handler = FilteredEventHandler(func, "fishing_catch", {}, self.items_db)
+                self._monitor.event_bus.register_handler(handler, priority)
+            logger.debug(f"Зарегистрирован обработчик улова в процессе: {func.__name__}")
+            return func
+        return decorator
+    
+    def on_cancel(self, priority: int = 0) -> Callable:
+        """Декоратор для обработки события отмены заброса"""
+        def decorator(func: Callable) -> Callable:
+            if self._monitor:
+                handler = FilteredEventHandler(func, "cancel", {}, self.items_db)
+                self._monitor.event_bus.register_handler(handler, priority)
+            logger.debug(f"Зарегистрирован обработчик отмены: {func.__name__}")
+            return func
+        return decorator
+    
     def on_bite(self, priority: int = 0) -> Callable:
         """
         Декоратор для обработки события клёва

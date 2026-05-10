@@ -87,6 +87,103 @@ class AsyncFishingRouter(BaseRouter):
             return func
         return decorator
     
+    def on_cast_end(self, priority: int = 0) -> Callable:
+        """
+        Декоратор для обработки события окончания заброса (поплавок упал в воду)
+        
+        Args:
+            priority: Приоритет обработчика (больше = раньше)
+        
+        Пример:
+            @router.on_cast_end()
+            async def my_handler(event):
+                print("Поплавок упал в воду!")
+                await asyncio.sleep(0.1)
+        """
+        def decorator(func: Callable[[FishingEvent], Awaitable[None]]) -> Callable:
+            self._handlers.append((func, "cast_end", {}, priority))
+            logger.debug(f"Зарегистрирован async обработчик окончания заброса: {func.__name__}")
+            return func
+        return decorator
+    
+    def on_float(self, priority: int = 0) -> Callable:
+        """
+        Декоратор для обработки события появления/обновления поплавка
+        
+        Args:
+            priority: Приоритет обработчика (больше = раньше)
+        """
+        def decorator(func: Callable[[FishingEvent], Awaitable[None]]) -> Callable:
+            self._handlers.append((func, "float", {}, priority))
+            logger.debug(f"Зарегистрирован async обработчик поплавка: {func.__name__}")
+            return func
+        return decorator
+    
+    def on_start_pull(self, priority: int = 0) -> Callable:
+        """
+        Декоратор для обработки события начала вытягивания рыбы
+        
+        Args:
+            priority: Приоритет обработчика (больше = раньше)
+        """
+        def decorator(func: Callable[[FishingEvent], Awaitable[None]]) -> Callable:
+            self._handlers.append((func, "start_pull", {}, priority))
+            logger.debug(f"Зарегистрирован async обработчик начала вытягивания: {func.__name__}")
+            return func
+        return decorator
+    
+    def on_pulling(self, priority: int = 0) -> Callable:
+        """
+        Декоратор для обработки события вытягивания рыбы (процесс)
+        
+        Args:
+            priority: Приоритет обработчика (больше = раньше)
+        """
+        def decorator(func: Callable[[FishingEvent], Awaitable[None]]) -> Callable:
+            self._handlers.append((func, "pulling", {}, priority))
+            logger.debug(f"Зарегистрирован async обработчик вытягивания: {func.__name__}")
+            return func
+        return decorator
+    
+    def on_stop_pull(self, priority: int = 0) -> Callable:
+        """
+        Декоратор для обработки события остановки вытягивания (отпустили)
+        
+        Args:
+            priority: Приоритет обработчика (больше = раньше)
+        """
+        def decorator(func: Callable[[FishingEvent], Awaitable[None]]) -> Callable:
+            self._handlers.append((func, "stop_pull", {}, priority))
+            logger.debug(f"Зарегистрирован async обработчик остановки вытягивания: {func.__name__}")
+            return func
+        return decorator
+    
+    def on_fishing_catch(self, priority: int = 0) -> Callable:
+        """
+        Декоратор для обработки улова в процессе рыбалки
+        
+        Args:
+            priority: Приоритет обработчика (больше = раньше)
+        """
+        def decorator(func: Callable[[FishingEvent], Awaitable[None]]) -> Callable:
+            self._handlers.append((func, "fishing_catch", {}, priority))
+            logger.debug(f"Зарегистрирован async обработчик улова в процессе: {func.__name__}")
+            return func
+        return decorator
+    
+    def on_cancel(self, priority: int = 0) -> Callable:
+        """
+        Декоратор для обработки события отмены заброса
+        
+        Args:
+            priority: Приоритет обработчика (больше = раньше)
+        """
+        def decorator(func: Callable[[FishingEvent], Awaitable[None]]) -> Callable:
+            self._handlers.append((func, "cancel", {}, priority))
+            logger.debug(f"Зарегистрирован async обработчик отмены: {func.__name__}")
+            return func
+        return decorator
+    
     def on_bite(self, priority: int = 0) -> Callable:
         """
         Декоратор для обработки события клёва
