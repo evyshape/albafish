@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.0.3] - 2026-05-10
+
+### Added
+- `set_player_id()` method in `AsyncFishingRouter` to lock player ID filtering
+- `_player_id` field in `AsyncFishingRouter` to persist player ID before monitor starts
+
+### Fixed
+- Player ID is now correctly passed to the underlying monitor when set before `start()`
+
 ## [1.0.2] - 2026-05-10
 
 ### Added

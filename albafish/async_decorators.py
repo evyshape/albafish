@@ -65,6 +65,7 @@ class AsyncFishingRouter(BaseRouter):
         super().__init__(items_db)
         self._monitor: Optional[AsyncFishingMonitor] = None
         self._handlers: List[tuple] = []
+        self._player_id: Optional[int] = None
         
         logger.info("AsyncFishingRouter инициализирован")
     
@@ -296,8 +297,18 @@ class AsyncFishingRouter(BaseRouter):
             )
             self._monitor._monitor.event_bus.register_handler(handler, priority)
         
+        if self._player_id is not None:
+            self._monitor._monitor.set_player_id(self._player_id)
+        
         logger.info("Запуск async роутера")
         await self._monitor.start(port=port, interface=interface)
+    
+    def set_player_id(self, player_id: int) -> None:
+        """Установить player_id для фильтрации чужих событий"""
+        self._player_id = player_id
+        if self._monitor:
+            self._monitor._monitor.set_player_id(player_id)
+        logger.info(f"Player ID установлен: {player_id}")
     
     async def stop(self) -> None:
         if self._monitor:
