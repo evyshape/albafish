@@ -175,17 +175,9 @@ class FishingMonitor:
 
         if self._player_id is None and self._auto_detect_player:
             self._player_id = player_id
-            logger.debug(f"Player ID автоматически определен: {player_id}")
-
-        if not self._player_id_locked and self._player_id != player_id:
-            logger.debug(f"Player ID изменен: {self._player_id} -> {player_id}")
-            self._player_id = player_id
 
         if self._player_id is not None and player_id != self._player_id:
-            logger.debug(f"Пропущено событие другого игрока: {player_id}")
             return
-        
-        from .constants import FishingEventType
 
         event_map = {
             FishingEventType.CAST: EventType.CAST,
@@ -201,7 +193,6 @@ class FishingMonitor:
         event_type = event_map.get(fishing_type)
         if event_type:
             fishing_event = self._create_event(event_type, player_id=player_id)
-            logger.debug(f"{EVENT_TYPE_NAMES[event_type]} event: player_id={player_id}")
             self._emit_event(fishing_event)
     
     def _handle_catch_event(self, event: EventData) -> None:
